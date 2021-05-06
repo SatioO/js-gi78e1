@@ -1,0 +1,38 @@
+<html>
+
+<head>
+  <title>Prime Video</title>
+</head>
+
+<body>
+  <form id="tv-channel-signup">
+    <input type="text" name="user.email" />
+    <input type="text" name="user.payment.card.name" />
+    <input type="text" name="user.payment.card.number" />
+    <input type="text" name="channel.name" />
+  </form>
+  <script>
+      const primeSignup = {}
+      const form = document.getElementById("tv-channel-signup")
+      form.addEventListener("change", (ev) => {
+          const queue = ev.target.name.split(".")
+          
+          function processQueue(obj, queue, index) {
+            if(!queue[index]) return
+            
+            if(!obj[queue[index]]) {
+              obj[queue[index]] = {}
+              // obj = obj[queue[index]]
+            }
+            console.log(obj)
+            processQueue(obj, queue, index + 1)
+          }
+
+          processQueue(primeSignup, queue, 0)
+
+      })
+
+  </script>
+</body>
+
+</html>
