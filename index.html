@@ -12,26 +12,27 @@
     <input type="text" name="channel.name" />
   </form>
   <script>
-      const primeSignup = {}
+      let obj = {}
       const form = document.getElementById("tv-channel-signup")
       form.addEventListener("change", (ev) => {
-          const queue = ev.target.name.split(".")
+          const keys = ev.target.name.split(".")
           
-          function processQueue(obj, queue, index) {
-            if(!queue[index]) return
-            
-            if(!obj[queue[index]]) {
-              obj[queue[index]] = {}
-              // obj = obj[queue[index]]
+          function iter(obj, i, value) {
+            if(i >= keys.length - 1) {
+              obj[keys[i]] = value
+              return obj
             }
-            console.log(obj)
-            processQueue(obj, queue, index + 1)
+            
+            if(!obj[keys[i]]) {
+              obj[keys[i]] = { }
+            }
+            
+            iter(obj[keys[i]], i+1, value)
           }
-
-          processQueue(primeSignup, queue, 0)
-
+          iter(obj, 0, ev.target.value)
+          console.log(obj)
       })
-
+      
   </script>
 </body>
 
